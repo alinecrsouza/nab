@@ -12,18 +12,16 @@
 
 <c:import url="header.jsp" />
 
-<!-- create the DAO -->
-<jsp:useBean id="dao" class="br.com.nab.jdbc.dao.ContactDao"/>
-
 <table>
 	<tr>
       	<th>Name</th>
       	<th>E-mail</th>
       	<th>Address</th>
       	<th>Date of Birth</th>
+      	<th>Action</th>
     </tr>
-  <!-- percorre contatos montando as linhas da tabela -->
-  <c:forEach var="contact" items="${dao.list}">
+  <!-- runs through contacts inserting the table rows -->
+  <c:forEach var="contact" items="${contacts}">
     <tr>
       <td>${contact.name}</td>
       <td><c:choose>
@@ -38,6 +36,9 @@
       <td>${contact.address}</td>
       <td><fmt:formatDate value="${contact.birthDate.time}"
     pattern="dd/MM/yyyy" /></td>
+    <td>
+      <a href="mvc?logic=ContactRemoveLogic&id=${contact.id}">Remove</a>
+    </td>
     </tr>
   </c:forEach>
 </table>
